@@ -14,7 +14,10 @@ EXCEPTIONS = {'Chris Froome': 'Christopher Froome',
               'Mickaël Cherel': '.php?id=140603',
               'Paweł Bernas': '.php?id=134451',
               'Carl Fredrik Hagen': '.php?id=179795',
-              'Steve Cummings': '.php?id=140584'}
+              'Steve Cummings': '.php?id=140584',
+              'Bart De Clerq': '.php?id=140336',
+              'Nic Dlamini': '.php?id=183449',
+              'Cristian Camilo Muñoz': '.php?id=235292'}
 
 
 class Rider(object):
@@ -43,7 +46,8 @@ def scrape_info():
         soup = bs(p.content, 'html.parser')
         results = soup.find(class_='results')
         if results is None:
-            return #  PCS does not have a 404 page
+            print(url)
+            return 0 #  PCS does not have a 404 page
         score = int(results.text.split()[-1])
         return score
 
@@ -57,7 +61,8 @@ def scrape_info():
         else:
             url = pcs_base + '-'.join(rider.name.split())
         print(url)
-        rider.points = get_points(url)
+        points = get_points(url) + get_points(url + '/2018')
+        rider.points = points
     ###################################################################
     return riders
 
