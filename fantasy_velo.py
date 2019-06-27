@@ -32,7 +32,7 @@ class Rider(object):
 
 def scrape_info():
     ###Scrape the riders from velogames################################
-    p = requests.get('https://www.velogames.com/dauphine/2019/riders.php')
+    p = requests.get('https://www.velogames.com/suisse/2019/riders.php')
     soup = bs(p.content, 'html.parser')
     table = soup.find('tbody')
     riders = [Rider(list(row.findAll('td'))[1].text,
@@ -61,7 +61,7 @@ def scrape_info():
         else:
             url = pcs_base + '-'.join(rider.name.split())
         print(url)
-        points = get_points(url) + get_points(url + '/2018')
+        points = get_points(url)
         rider.points = points
     ###################################################################
     return riders

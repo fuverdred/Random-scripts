@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from collections import defaultdict
 
 url = 'https://en.wikipedia.org/wiki/List_of_London_Underground_stations'
 dic_url = 'http://www.greenworm.net/sites/default/files/gw-assets/enable1-wwf-v4.0-wordlist.txt'
@@ -19,6 +20,15 @@ words = [w.upper() for w in words]
 word_stations = [station for station in stations
         if all([word if word in words else False for word in station.split()])]
 
-with open('c:/Users/Ferd/Documents/Crossword-Filler/themes/tube_stations.txt', 'w') as f:
-    for station in word_stations:
-        f.write(''.join(station.split())+'\n')
+##with open('c:/Users/Ferd/Documents/Crossword-Filler/themes/tube_stations.txt', 'w') as f:
+##    for station in word_stations:
+##        f.write(''.join(station.split())+'\n')
+
+word_frequency = defaultdict(int)
+
+for station in stations:
+    for word in station.split():
+        word_frequency[word] += 1
+
+word_frequency = [(key, word_frequency[key]) for key in word_frequency.keys()]
+word_frequency.sort(key=lambda x: x[1], reverse=True)
