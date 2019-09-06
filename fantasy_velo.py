@@ -17,7 +17,15 @@ EXCEPTIONS = {'Chris Froome': 'Christopher Froome',
               'Steve Cummings': '.php?id=140584',
               'Bart De Clerq': '.php?id=140336',
               'Nic Dlamini': '.php?id=183449',
-              'Cristian Camilo Muñoz': '.php?id=235292'}
+              'Cristian Camilo Muñoz': '.php?id=235292',
+              'Eddie Dunbar': 'edward-irl-dunbar',
+              'Amund Jansen': '.php?id=164908',
+              'Larry Warbasse': '.php?id=133703',
+              'Luis Villalobos': '.php?id=195094',
+              'Alex Edmondson': '.php?id=136190',
+              'Trond Tronsen': '.php?id=170943',
+              'Rasmus Iversen': '.php?id=184409',
+              'Sindre Lunke': '.php?id=163724'}
 
 
 class Rider(object):
@@ -32,7 +40,7 @@ class Rider(object):
 
 def scrape_info():
     ###Scrape the riders from velogames################################
-    p = requests.get('https://www.velogames.com/suisse/2019/riders.php')
+    p = requests.get('https://www.velogames.com/tour-of-britain/2019/riders.php')
     soup = bs(p.content, 'html.parser')
     table = soup.find('tbody')
     riders = [Rider(list(row.findAll('td'))[1].text,

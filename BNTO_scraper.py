@@ -29,10 +29,10 @@ def strip_bnto_comments(url, name='BNTO'):
     return BNTO_comments
                 
 gathered = []
-for puzzle_number in range(27894, 27327, -1):
+for puzzle_number in range(27327, 22000, -1):
     url = base + str(puzzle_number)
     print(url)
-    comments = strip_bnto_comments(url, 'Alex')
+    comments = strip_bnto_comments(url, 'Brendan (not that one)')
     if comments:
         gathered.append(BNTO_comment(url, comments))
     
